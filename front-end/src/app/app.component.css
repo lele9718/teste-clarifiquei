@@ -1,0 +1,73 @@
+.app-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  align-items: flex-start;
+}
+
+.menu-toggle {
+  width: 100%;
+  text-align: left;
+  background-color: #333;
+  color: white;
+  border: none;
+  padding: 10px;
+  font-size: 24px;
+  cursor: pointer;
+  z-index: 1000;
+}
+
+.drawer {
+  position: fixed;
+  top: 0;
+  left: -250px; /* Esconde o menu inicialmente */
+  width: 250px;
+  height: 100%;
+  background-color: #333;
+  color: white;
+  transition: left 0.3s ease;
+  z-index: 999;
+}
+
+.drawer.open {
+  left: 0; /* Mostra o menu */
+}
+
+.drawer h3 {
+  margin: 0;
+  padding: 15px;
+  text-align: center;
+  background-color: #444;
+}
+
+.drawer ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.drawer ul li {
+  padding: 15px;
+  border-bottom: 1px solid #444;
+}
+
+.drawer ul li a {
+  color: white;
+  text-decoration: none;
+  display: block;
+  padding: 10px;
+}
+
+.drawer ul li a:hover {
+  background-color: #555;
+}
+
+.content {
+  margin-left: 25px;
+  transition: margin-left 0.3s ease;
+  padding: 20px;
+}
+
+.content.shifted {
+  margin-left: 250px; /* Ajusta o conteúdo quando o menu está aberto */
+}

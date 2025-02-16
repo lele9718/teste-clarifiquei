@@ -1,0 +1,49 @@
+<h5>Alocações</h5>
+
+<button (click)="allocateTasks()" class="button">Alocar próxima tarefa</button><br>
+<span class="errorMessage" *ngIf="errorMessage">{{errorMessage}}</span>
+<table class="task-table">
+  <thead>
+    <tr>
+      <th>Engenheiro</th>
+      <th>Status</th>
+      <th>Tarefa</th>
+      <th>Ações</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let assignment of assignments; let i = index">
+      <td class="big-td">{{ assignment.engineer_name }}</td>
+      <td>
+        <span [class.priority-high]="assignment.status === 'Em andamento'"
+        [class.priority-medium]="assignment.status === 'Pendente'"
+        [class.priority-low]="assignment.status === 'Concluída'" class="big-badge">{{ assignment.status  }}</span>
+      </td>
+      <td class="big-td">{{ assignment.task_name }}</td>
+      <td>
+        <button *ngIf="assignment.status === 'Pendente'" (click)="startTask(assignment.id)" class="action-btn edit-btn">Iniciar</button>
+        <button *ngIf="assignment.status === 'Em andamento'" (click)="completeTask(assignment.id)" class="action-btn delete-btn">Concluir</button>
+      </td>
+    </tr>
+    <tr *ngIf="assignments.length == 0" class="no-registry">
+      <td colspan="5">Nenhum registro encontrado</td>
+    </tr>
+  </tbody>
+</table>
+<h5>Progresso</h5>
+<ngx-charts-bar-horizontal-2d
+  [view]="[700,400]"
+  [barPadding]="10"
+  [results]="multi"
+  [gradient]="gradient"
+  [xAxis]="showXAxis"
+  [yAxis]="showYAxis"
+  [legend]="showLegend"
+  [showXAxisLabel]="showXAxisLabel"
+  [showYAxisLabel]="showYAxisLabel"
+  [xAxisLabel]="xAxisLabel"
+  [yAxisLabel]="yAxisLabel"
+  [xScaleMax]="20"
+  >
+</ngx-charts-bar-horizontal-2d>
+<app-toast-message [isToastVisible]="isToastVisible" [message]="toastMessage"></app-toast-message>

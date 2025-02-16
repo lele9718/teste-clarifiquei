@@ -1,0 +1,22 @@
+<!-- Container principal -->
+<div class="app-container">
+    <!-- Botão para abrir/fechar o menu -->
+    <button class="menu-toggle" (click)="toggleMenu()">
+      &#9776; <!-- Ícone de menu -->
+    </button>
+  
+    <!-- Menu Drawer -->
+    <div class="drawer" [class.open]="isMenuOpen">
+      <h3>Menu</h3>
+      <ul>
+        <li><a (click)="navigateTo('engineers')">Engenheiros</a></li>
+        <li><a (click)="navigateTo('tasks')">Tarefas</a></li>
+        <li><a (click)="navigateTo('assignments')">Alocações</a></li>
+      </ul>
+    </div>
+  
+    <!-- Conteúdo principal -->
+    <div class="content">
+      <router-outlet></router-outlet>
+    </div>
+  </div>

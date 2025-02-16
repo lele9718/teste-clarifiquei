@@ -1,0 +1,41 @@
+.toast-message {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  color: white;
+  font-weight: bold;
+  padding: 15px 25px;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  font-size: 14px;
+  z-index: 1000;
+  animation: fadeInOut 2s ease-in-out forwards;
+}
+
+.color-success {
+  background-color: #28af60; /* Verde para sucesso */
+}
+
+.color-danger {
+  background-color: #c0392b;
+}
+
+/* Animação de fade-in e fade-out */
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  10% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  90% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+}

@@ -1,0 +1,46 @@
+<h5>Gerenciar Tarefas</h5>
+
+<div class="divForm" [formGroup]="formGroup">
+  <input formControlName="name" class="input" placeholder="Nome" />
+  <select formControlName="priority" class="input" placeholder="Prioridade">
+    <option [ngValue]="null">Prioridade</option>
+    <option value="Alta">Alta</option>
+    <option value="Média">Média</option>
+    <option value="Baixa">Baixa</option>
+  </select>
+  <input formControlName="time_required" class="input" [min]="1" type="number" placeholder="Tempo Estimado" />
+  <button (click)="addOrUpdateTask()" class="button">{{ isEditing ? 'Editar' : 'Adicionar'}}</button>
+</div>
+
+<table class="task-table">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Nome</th>
+      <th>Prioridade</th>
+      <th>Tempo Estimado (horas)</th>
+      <th>Ações</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let task of tasks; let i = index">
+      <td>{{ i + 1 }}</td>
+      <td>{{ task.name }}</td>
+      <td>
+        <span [class.priority-high]="task.priority === 'Alta'"
+        [class.priority-medium]="task.priority === 'Média'"
+        [class.priority-low]="task.priority === 'Baixa'">{{ task.priority }}</span>
+      </td>
+      <td>{{ task.time_required }}h</td>
+      <td>
+        <button (click)="updateTask(task)" class="action-btn edit-btn">Editar</button>
+        <button (click)="openModal(task)" class="action-btn delete-btn">Excluir</button>
+      </td>
+    </tr>
+    <tr *ngIf="tasks.length == 0" class="no-registry">
+      <td colspan="5">Nenhum registro encontrado</td>
+    </tr>
+  </tbody>
+</table>
+
+<app-toast-message [isToastVisible]="isToastVisible" [message]="toastMessage"></app-toast-message>

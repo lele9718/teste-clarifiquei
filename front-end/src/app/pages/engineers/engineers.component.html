@@ -1,0 +1,40 @@
+<h5>Gerenciar Engenheiros</h5>
+
+<div class="divForm" [formGroup]="formGroup">
+  <input formControlName="name" class="input" placeholder="Nome" />
+  <input formControlName="max_workload" class="input" type="number" min="1" placeholder="Carga Máxima" />
+  <input formControlName="efficiency" class="input" type="number" min="1" placeholder="Eficiência" />
+  <button (click)="addOrUpdateTask()" class="button">{{ isEditing ? 'Editar' : 'Adicionar'}}</button>
+</div>
+<span class="errorMessage" *ngIf="errorMessage">{{errorMessage}}</span>
+
+<table class="task-table">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Nome</th>
+      <th>Carga máxima</th>
+      <th>Eficiência</th>
+      <th>Ações</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let task of tasks; let i = index">
+      <td>{{ i + 1 }}</td>
+      <td>{{ task.name }}</td>
+      <td>
+        <span >{{ task.max_workload }}h</span>
+      </td>
+      <td>{{ task.efficiency }}%</td>
+      <td>
+        <button (click)="updateTask(task)" class="action-btn edit-btn">Editar</button>
+        <button (click)="openModal(task)" class="action-btn delete-btn">Excluir</button>
+      </td>
+    </tr>
+    <tr *ngIf="tasks.length == 0" class="no-registry">
+      <td colspan="5">Nenhum registro encontrado</td>
+    </tr>
+  </tbody>
+</table>
+
+<app-toast-message [isToastVisible]="isToastVisible" [message]="toastMessage"></app-toast-message>
